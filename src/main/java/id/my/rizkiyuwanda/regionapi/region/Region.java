@@ -1,22 +1,15 @@
 package id.my.rizkiyuwanda.regionapi.region;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
+import jakarta.persistence.*;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "region")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Region {
     @Id
-    @Column(length = 5)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     private String name;
 }

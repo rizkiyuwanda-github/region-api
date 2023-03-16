@@ -27,17 +27,17 @@ public class RegionController {
     }
 
     @DeleteMapping("/deletebyid/{id}")
-    public ResponseEntity<HttpStatus> deletebyid(@PathVariable("id") String id) {
+    public ResponseEntity<String> deleteById(@PathVariable("id") Long id) {
         try {
             regionService.deleteById(id);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>("Deleted Success", HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping("/findbyid/{id}")
-    public ResponseEntity<Region> findbyid(@PathVariable("id") String id) {
+    public ResponseEntity<Region> findById(@PathVariable("id") Long id) {
         Optional<Region> region = regionService.findById(id);
         if (region.isPresent()) {
             return new ResponseEntity<>(region.get(), HttpStatus.OK);
@@ -46,8 +46,18 @@ public class RegionController {
         }
     }
 
+    @GetMapping("/findbyname/{name}")
+    public ResponseEntity<Region> findbByName(@PathVariable("name") String name) {
+        Optional<Region> region = regionService.findByName(name);
+        if (region.isPresent()) {
+            return new ResponseEntity<>(region.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @GetMapping("/findall")
-    public ResponseEntity<List<Region>> findall() {
+    public ResponseEntity<List<Region>> findAll() {
         try {
             List<Region> regions = new ArrayList<>();
             regionService.findAll().forEach(regions::add);

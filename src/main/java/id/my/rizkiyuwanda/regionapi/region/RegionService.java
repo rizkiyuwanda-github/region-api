@@ -14,10 +14,14 @@ public class RegionService {
 
     public Region save(Region region) {return regionRepository.save(region);}
 
-    public void deleteById(String id) {regionRepository.deleteById(id);}
+    public void deleteById(Long id) {regionRepository.deleteById(id);}
 
-    public Optional<Region> findById(String id) {
+    public Optional<Region> findById(Long id) {
         return regionRepository.findById(id);
+    }
+
+    public Optional<Region> findByName(String name) {
+        return regionRepository.findByName(name);
     }
 
     public Iterable<Region> findAll() {
